@@ -1,0 +1,26 @@
+<%= form_for(@org) do |form| %>
+  <% if @org.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@org.errors.count, "error") %> prohibited this org from being saved:</h2>
+
+      <ul>
+      <% @org.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %><br />
+    <%= form.text_field :name %>
+  </div>
+  <div class="members">
+    <%= render partial: 'member_form', locals: {form: form} %>
+  </div>
+  <%= link_to 'Add new member', :new_member_orgs, id: :add_new_member, data: {remote: true, type: 'html'} %>
+
+  <div class="actions">
+    <%= form.submit data: {disable_with: "Saving"} %>
+  </div>
+<% end %>

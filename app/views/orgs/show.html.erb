@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @org.name %>
+</p>
+<ul>
+  <% @org.members.each do |member| -%>
+    <li>Name: <%= member.name %>, Attendances: <%= member.attendances %></li>
+  <% end -%>
+</ul>
+
+
+<%= link_to 'Edit', edit_org_path(@org) %> |
+<%= link_to 'Back', orgs_path %>

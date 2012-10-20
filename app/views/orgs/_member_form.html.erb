@@ -1,0 +1,13 @@
+<%= fields_for @org do |form| -%>
+  <%= form.fields_for :members, child_index: @id ? @id : nil do |member_fields| -%>
+    <fieldset>
+      <%= member_fields.label :name %>
+      <%= member_fields.text_field :name %>
+      <%= member_fields.label :attendances %>
+      <%= member_fields.text_field :attendances %>
+      <% if member_fields.object.persisted? -%>
+        Delete? <%= member_fields.check_box :_destroy %>
+      <% end -%>
+    </fieldset>
+  <% end -%>
+<% end -%>
