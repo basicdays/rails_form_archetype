@@ -16,7 +16,7 @@
     <%= form.text_field :name %>
   </div>
   <div class="members">
-    <%= render partial: 'member_form', locals: {form: form} %>
+    <%= render 'member_form' %>
   </div>
   <%= link_to 'Add new member', :new_member_orgs, id: :add_new_member, data: {remote: true, type: 'html'} %>
 
