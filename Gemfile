@@ -7,7 +7,6 @@ gem 'rails', '3.2.8'
 
 gem 'sqlite3'
 
-
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -24,6 +23,11 @@ end
 
 group :development do
   gem 'thin'
+end
+
+group :test do
+  gem 'test-unit'
+  gem 'ruby-prof'
 end
 
 

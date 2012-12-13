@@ -3,6 +3,8 @@ FormArchetype::Application.routes.draw do
     get 'new_member', :on => :collection
   end
 
+  resources :businesses
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -52,7 +54,7 @@ FormArchetype::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'orgs#index'
+  root :to => 'Orgs#index'
 
   # See how all your routes lay out with "rake routes"
 

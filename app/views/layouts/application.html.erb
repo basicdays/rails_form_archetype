@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>FormArchetype</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <title>FormArchetype</title>
+    <%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <%= yield %>
 
-<%= yield %>
-
-</body>
+    <h3>Site Layout</h3>
+    <ul>
+      <li><%= link_to 'one-to-many form test', orgs_path %></li>
+      <li><%= link_to 'multi-nested form test', businesses_path %></li>
+    </ul>
+  </body>
 </html>
