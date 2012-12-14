@@ -25,8 +25,7 @@ class BusinessesController < ApplicationController
   # GET /businesses/new.json
   def new
     @business = Business.new
-    @business.build_contact unless @business.contact
-    @business.contact.build_address unless @business.contact.address
+    @business.prepare_for_form
 
     respond_to do |format|
       format.html # new.html.erb
@@ -37,20 +36,20 @@ class BusinessesController < ApplicationController
   # GET /businesses/1/edit
   def edit
     @business = Business.find(params[:id])
+    @business.prepare_for_form
   end
 
   # POST /businesses
   # POST /businesses.json
   def create
     @business = Business.new(params[:business])
-    @business.build_contact unless @business.contact
-    @business.contact.build_address unless @business.contact.address
 
     respond_to do |format|
       if @business.save
         format.html { redirect_to @business, notice: 'Business was successfully created.' }
         format.json { render json: @business, status: :created, location: @business }
       else
+        @business.prepare_for_form
         format.html { render action: "new" }
         format.json { render json: @business.errors, status: :unprocessable_entity }
       end
@@ -61,14 +60,13 @@ class BusinessesController < ApplicationController
   # PUT /businesses/1.json
   def update
     @business = Business.find(params[:id])
-    @business.build_contact unless @business.contact
-    @business.contact.build_address unless @business.contact.address
 
     respond_to do |format|
       if @business.update_attributes(params[:business])
         format.html { redirect_to @business, notice: 'Business was successfully updated.' }
         format.json { head :no_content }
       else
+        @business.prepare_for_form
         format.html { render action: "edit" }
         format.json { render json: @business.errors, status: :unprocessable_entity }
       end

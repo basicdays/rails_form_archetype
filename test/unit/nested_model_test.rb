@@ -1,11 +1,7 @@
+require 'test_helper'
+
 class NestedModelTest < ActiveSupport::TestCase
-  #include NestedModel
-  #class StubObject
-  #
-  #  def test_blank(attributes)
-  #    all_nested_blank attributes
-  #  end
-  #end
+  include NestedModel
 
   test 'properly checks if all nested models are blank' do
     params = {
@@ -14,8 +10,16 @@ class NestedModelTest < ActiveSupport::TestCase
             address1: ''
         }
     }
-    #obj = StubObject.new
-
     assert all_nested_blank(params)
+  end
+
+  test 'properly checks if all nested models aren\'t blank' do
+    params = {
+        name: '',
+        address_attributes: {
+            address1: 'boo'
+        }
+    }
+    assert !all_nested_blank(params)
   end
 end

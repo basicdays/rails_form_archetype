@@ -1,4 +1,6 @@
 class Business < ActiveRecord::Base
+  include NestedModel
+
   attr_accessible :name, :contact_attributes
 
   has_one :contact
@@ -6,14 +8,8 @@ class Business < ActiveRecord::Base
 
   validates :name, presence: true
 
-  protected
-  def all_nested_blank(attributes)
-    attributes.all? do |key, value|
-      if value.is_a? Hash
-        all_nested_blank value
-      else
-        key == '_destroy' || value.blank?
-      end
-    end
+  def prepare_for_form
+    build_contact unless contact
+    contact.build_address unless contact.address
   end
 end
