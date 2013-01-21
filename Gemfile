@@ -16,7 +16,7 @@ group :assets do
   gem 'jquery-rails'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  gem 'therubyracer', :platforms => :ruby
+  gem 'therubyracer', platforms: :ruby
 
   gem 'uglifier', '>= 1.0.3'
 end
@@ -26,8 +26,12 @@ group :development do
 end
 
 group :test do
-  gem 'test-unit'
+  gem "win32console", '1.3.0', platforms: [:mingw, :mswin]
+  gem "minitest"
+  gem "minitest-reporters", '>= 0.5.0'
   gem 'ruby-prof'
+  gem 'spork-rails'
+  gem 'spork-testunit'
 end
 
 
