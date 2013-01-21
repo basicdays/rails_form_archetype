@@ -7,4 +7,5 @@
 /tmp
 
 # Project files
-/.idea/workspace.xml
+/.idea
+/.rvmrc
