@@ -1,10 +1,18 @@
-<%= fields_for @org do |form| -%>
+<%= fields_for @org, data: {name: 'org_form'} do |form| -%>
   <%= form.fields_for :members, child_index: @id ? @id : nil do |member_fields| -%>
     <fieldset>
       <%= member_fields.label :name %>
       <%= member_fields.text_field :name %>
       <%= member_fields.label :attendances %>
       <%= member_fields.text_field :attendances %>
+      <%= member_fields.label :has_address %>
+      <%= member_fields.check_box :has_address, data: {toggle_src: "address-#{member_fields.object.form_id}"} %>
+      <div data-toggle-dest="<%= "address-#{member_fields.object.form_id}" %>">
+        <%= member_fields.fields_for :address do |address_fields| -%>
+          <%= address_fields.label :address1 %>
+          <%= address_fields.text_field :address1, disabled: !member_fields.object.has_address? %>
+        <% end -%>
+      </div>
       <% if member_fields.object.persisted? -%>
         Delete? <%= member_fields.check_box :_destroy %>
       <% end -%>

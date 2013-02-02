@@ -25,6 +25,7 @@ class OrgsController < ApplicationController
   # GET /orgs/new.json
   def new
     @org = Org.new
+    @org.prepare_for_form
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,14 +35,15 @@ class OrgsController < ApplicationController
 
   def new_member
     @org = Org.new
-    @org.members.build
-    @id = SecureRandom.uuid
+    @org.prepare_for_form
+    @id = @org.form_id
     render partial: 'member_form'
   end
 
   # GET /orgs/1/edit
   def edit
     @org = Org.find(params[:id])
+    @org.prepare_for_form
   end
 
   # POST /orgs
@@ -54,6 +56,7 @@ class OrgsController < ApplicationController
         format.html { redirect_to @org, notice: 'Org was successfully created.' }
         format.json { render json: @org, status: :created, location: @org }
       else
+        @org.prepare_for_form
         format.html { render action: "new" }
         format.json { render json: @org.errors, status: :unprocessable_entity }
       end
@@ -70,6 +73,7 @@ class OrgsController < ApplicationController
         format.html { redirect_to @org, notice: 'Org was successfully updated.' }
         format.json { head :no_content }
       else
+        @org.prepare_for_form
         format.html { render action: "edit" }
         format.json { render json: @org.errors, status: :unprocessable_entity }
       end
